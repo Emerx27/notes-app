@@ -6,11 +6,12 @@ function Sidebar() {
     const [currentId, setCurrentId] = useState(null)
     const [note, setNote] = useState({
         id: 1,
-        title: "Title",
+        title: "",
         content: "Write your thoughts here...",
     });
 
     function createNote() {
+        const title = `Note ${nextId}`;
         const day = new Date().getDate();
         let month = new Date().getMonth() + 1;
         if (month < 10) {
@@ -18,10 +19,10 @@ function Sidebar() {
         }
         const year = new Date().getFullYear();
         const date = `${day} / ${month} / ${year}`;
-        const newNote = { ...note, id: nextId, date };
+        const newNote = { ...note, title, id: nextId, date };
         setAllNotes([...allNotes, newNote]);
+        setCurrentId(nextId);
         nextId++;
-        setCurrentId(allNotes.length + 1);
     }
 
     function renderTask() {
@@ -43,9 +44,13 @@ function Sidebar() {
         const actualEditedNote = allNotes.filter(note => note.id === currentId);
         return actualEditedNote.map(note => (
             <form key={note.id}>
-                <input type="text" value={note.title} onChange={fillInput} name="title" />
+                <div>
+                    <input type="text" value={note.title} onChange={fillInput} name="title" />
 
-                <textarea value={note.content} onChange={fillInput} name="content"></textarea>
+                    <textarea value={note.content} onChange={fillInput} name="content"></textarea>
+                </div>
+
+                <button onClick={deleteNote}>Delete note</button>
             </form>
         ))
     }
@@ -55,6 +60,11 @@ function Sidebar() {
         setAllNotes(prevNotes => prevNotes.map(note =>
             note.id === currentId ? { ...note, [name]: value } : note
         ));
+    }
+
+    function deleteNote() {
+        const actualEditedNote = allNotes.filter(note => note.id !== currentId);
+        setAllNotes(actualEditedNote);
     }
     return (
         <aside>
