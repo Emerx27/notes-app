@@ -1,4 +1,5 @@
 import { useState } from "react";
+let nextId = 1;
 
 function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
@@ -10,8 +11,9 @@ function Sidebar() {
     });
 
     function createNote() {
-        const newNote = { ...note, id: note.id + 1};
+        const newNote = { ...note, id: nextId};
         setAllNotes([...allNotes, newNote]);
+        nextId++;
     }
     
     return (
