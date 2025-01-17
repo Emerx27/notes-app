@@ -5,8 +5,6 @@ function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
     const [currentId, setCurrentId] = useState(null)
     const [note, setNote] = useState({
-        id: 1,
-        title: "",
         content: "Write your thoughts here...",
     });
 
@@ -19,7 +17,7 @@ function Sidebar() {
         }
         const year = new Date().getFullYear();
         const date = `${day} / ${month} / ${year}`;
-        const newNote = { ...note, title, id: nextId, date };
+        const newNote = { ...note, title, id: nextId, date};
         setAllNotes([...allNotes, newNote]);
         setCurrentId(nextId);
         nextId++;
