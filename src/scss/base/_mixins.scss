@@ -1,0 +1,11 @@
+@mixin tab() {
+    @media(min-width: 728px) {
+        @content;
+    }
+}
+
+@mixin pc() {
+    @media(min-width: 1080px) {
+        @content;
+    }
+}

@@ -81,14 +81,14 @@ function Sidebar() {
                         noteEditedId={noteEditedId}
                     />
                 </ul>
-
-                <Form
-                    filteredNotes={filteredNotes}
-                    currentId={currentId}
-                    fillInput={fillInput}
-                    deleteNote={deleteNote}
-                />
             </aside>
+
+            <Form
+                filteredNotes={filteredNotes}
+                currentId={currentId}
+                fillInput={fillInput}
+                deleteNote={deleteNote}
+            />
         </>
     )
 }
