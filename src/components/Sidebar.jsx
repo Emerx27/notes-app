@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
+import Form from "./Form";
 
 function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
@@ -57,21 +58,6 @@ function Sidebar() {
         setCurrentId(id);
     }
 
-    function editNote() {
-        const actualEditedNote = filteredNotes.filter(note => note.id === currentId);
-        return actualEditedNote.map(note => (
-            <form key={note.id}>
-                <div>
-                    <input type="text" value={note.title} onChange={fillInput} name="title" />
-
-                    <textarea value={note.content} onChange={fillInput} name="content"></textarea>
-                </div>
-
-                <button onClick={deleteNote}>Delete note</button>
-            </form>
-        ))
-    }
-
     function fillInput(e) {
         const { name, value } = e.target;
         setFilteredNotes(prevNotes => {
@@ -102,7 +88,12 @@ function Sidebar() {
                     {renderTask()}
                 </ul>
 
-                {editNote()}
+                <Form
+                    filteredNotes={filteredNotes}
+                    currentId={currentId}
+                    fillInput={fillInput}
+                    deleteNote={deleteNote}
+                />
             </aside>
         </>
     )
