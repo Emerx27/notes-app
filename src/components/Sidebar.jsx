@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
-let nextId = 1;
 
 function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
@@ -8,8 +7,17 @@ function Sidebar() {
     const [note, setNote] = useState({
         content: "Write your thoughts here...",
     });
-    const [filteredNotes, setFilteredNotes] = useState(allNotes);
+    const [filteredNotes, setFilteredNotes] = useState(JSON.parse(localStorage.getItem("notes")) || []);
     const [filtered, isFiltered] = useState(false);
+    const [nextId, setNextId] = useState(JSON.parse(localStorage.getItem("nextId")) || 1);
+
+    useEffect(() => {
+        localStorage.setItem("notes", JSON.stringify(filteredNotes));
+    }, [createNote, fillInput, deleteNote]);
+
+    useEffect(() => {
+        localStorage.setItem("nextId", JSON.stringify(nextId));
+    }, [createNote]);
 
     function createNote() {
         const title = `Note ${nextId}`;
@@ -21,14 +29,15 @@ function Sidebar() {
         const year = new Date().getFullYear();
         const date = `${day} / ${month} / ${year}`;
         const newNote = { ...note, title, id: nextId, date };
-        if(!filtered) {
+        if (!filtered) {
             setFilteredNotes(prev => {
                 const addNotes = [...prev, newNote];
                 setAllNotes(addNotes);
                 return addNotes;
             });
             setCurrentId(nextId);
-            nextId++;
+            const newId = nextId + 1;
+            setNextId(newId);
         }
     }
 
@@ -67,8 +76,6 @@ function Sidebar() {
         setFilteredNotes(prevNotes => prevNotes.map(note =>
             note.id === currentId ? { ...note, [name]: value } : note
         ));
-
-        console.log(allNotes)
     }
 
     function deleteNote() {
@@ -78,7 +85,7 @@ function Sidebar() {
     }
     return (
         <>
-            <Header 
+            <Header
                 allNotes={allNotes}
                 setAllNotes={setFilteredNotes}
                 isFiltered={isFiltered}
