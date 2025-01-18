@@ -63,6 +63,7 @@ function Sidebar() {
         const actualEditedNote = filteredNotes.filter(note => note.id !== currentId);
         setFilteredNotes(actualEditedNote);
         setAllNotes(actualEditedNote);
+        setCurrentId(null);
     }
     return (
         <>
