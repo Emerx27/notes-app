@@ -13,7 +13,8 @@ function Sidebar() {
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(filteredNotes));
-    }, [createNote, fillInput, deleteNote]);
+        localStorage.setItem("notesOr", JSON.stringify(allNotes));
+    }, [filteredNotes, allNotes]);
 
     useEffect(() => {
         localStorage.setItem("nextId", JSON.stringify(nextId));
@@ -73,9 +74,13 @@ function Sidebar() {
 
     function fillInput(e) {
         const { name, value } = e.target;
-        setFilteredNotes(prevNotes => prevNotes.map(note =>
-            note.id === currentId ? { ...note, [name]: value } : note
-        ));
+        setFilteredNotes(prevNotes => {
+            const updatedNotes = prevNotes.map(note =>
+                note.id === currentId ? { ...note, [name]: value } : note
+            );
+            setAllNotes(updatedNotes);
+            return updatedNotes;
+        });
     }
 
     function deleteNote() {
