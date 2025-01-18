@@ -1,5 +1,5 @@
-import Sidebar from "./components/Sidebar"
-import "normalize.css"
+import Sidebar from "./components/Sidebar";
+import "normalize.css";
 
 function App() {
   return (
