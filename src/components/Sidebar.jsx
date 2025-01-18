@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "./Header";
 import Form from "./Form";
+import Note from "./Note";
 
 function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
@@ -43,17 +44,6 @@ function Sidebar() {
         }
     }
 
-    function renderTask() {
-        return filteredNotes.map(note => (
-            <li key={note.id}>
-                <article onClick={() => noteEditedId(note.id)}>
-                    <h3>{note.title}</h3>
-                    <p>Created: {note.date}</p>
-                </article>
-            </li>
-        ));
-    }
-
     function noteEditedId(id) {
         setCurrentId(id);
     }
@@ -85,7 +75,10 @@ function Sidebar() {
                 <button onClick={createNote}>Create new note</button>
 
                 <ul>
-                    {renderTask()}
+                    <Note
+                        filteredNotes={filteredNotes}
+                        noteEditedId={noteEditedId}
+                    />
                 </ul>
 
                 <Form
