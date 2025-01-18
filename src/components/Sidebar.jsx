@@ -1,12 +1,15 @@
 import { useState } from "react";
+import Header from "./Header";
 let nextId = 1;
 
 function Sidebar() {
     const [allNotes, setAllNotes] = useState([]);
-    const [currentId, setCurrentId] = useState(null)
+    const [currentId, setCurrentId] = useState(null);
     const [note, setNote] = useState({
         content: "Write your thoughts here...",
     });
+    const [filteredNotes, setFilteredNotes] = useState(allNotes);
+    const [filtered, isFiltered] = useState(false);
 
     function createNote() {
         const title = `Note ${nextId}`;
@@ -17,14 +20,20 @@ function Sidebar() {
         }
         const year = new Date().getFullYear();
         const date = `${day} / ${month} / ${year}`;
-        const newNote = { ...note, title, id: nextId, date};
-        setAllNotes([...allNotes, newNote]);
-        setCurrentId(nextId);
-        nextId++;
+        const newNote = { ...note, title, id: nextId, date };
+        if(!filtered) {
+            setFilteredNotes(prev => {
+                const addNotes = [...prev, newNote];
+                setAllNotes(addNotes);
+                return addNotes;
+            });
+            setCurrentId(nextId);
+            nextId++;
+        }
     }
 
     function renderTask() {
-        return allNotes.map(note => (
+        return filteredNotes.map(note => (
             <li key={note.id}>
                 <article onClick={() => noteEditedId(note.id)}>
                     <h3>{note.title}</h3>
@@ -39,7 +48,7 @@ function Sidebar() {
     }
 
     function editNote() {
-        const actualEditedNote = allNotes.filter(note => note.id === currentId);
+        const actualEditedNote = filteredNotes.filter(note => note.id === currentId);
         return actualEditedNote.map(note => (
             <form key={note.id}>
                 <div>
@@ -55,25 +64,35 @@ function Sidebar() {
 
     function fillInput(e) {
         const { name, value } = e.target;
-        setAllNotes(prevNotes => prevNotes.map(note =>
+        setFilteredNotes(prevNotes => prevNotes.map(note =>
             note.id === currentId ? { ...note, [name]: value } : note
         ));
+
+        console.log(allNotes)
     }
 
     function deleteNote() {
-        const actualEditedNote = allNotes.filter(note => note.id !== currentId);
+        const actualEditedNote = filteredNotes.filter(note => note.id !== currentId);
+        setFilteredNotes(actualEditedNote);
         setAllNotes(actualEditedNote);
     }
     return (
-        <aside>
-            <button onClick={createNote}>Create new note</button>
+        <>
+            <Header 
+                allNotes={allNotes}
+                setAllNotes={setFilteredNotes}
+                isFiltered={isFiltered}
+            />
+            <aside>
+                <button onClick={createNote}>Create new note</button>
 
-            <ul>
-                {renderTask()}
-            </ul>
+                <ul>
+                    {renderTask()}
+                </ul>
 
-            {editNote()}
-        </aside>
+                {editNote()}
+            </aside>
+        </>
     )
 }
 
