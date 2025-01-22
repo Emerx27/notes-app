@@ -1,5 +1,5 @@
-function Form({filteredNotes, currentId, fillInput, deleteNote}) {
-    const actualEditedNote = filteredNotes.filter(note => note.id === currentId);
+function Form({allNotes, currentId, fillInput, deleteNote}) {
+    const actualEditedNote = allNotes.filter(note => note.id === currentId);
     return actualEditedNote.map(note => (
         <form key={note.id}>
             <div>

@@ -1,4 +1,5 @@
-function Note({filteredNotes, noteEditedId}) {
+function Note({allNotes, noteEditedId, filterValue}) {
+    const filteredNotes = allNotes.filter(note => note.title.toLowerCase().includes(filterValue));
     return filteredNotes.map(note => (
         <li key={note.id}>
             <article onClick={() => noteEditedId(note.id)}>

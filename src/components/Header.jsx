@@ -1,14 +1,13 @@
-function Header({allNotes, setAllNotes, isFiltered}) {
+function Header({setFiltered, setFilterValue, setCurrentId}) {
     function filterNotes(e) {
-        const value = e.target.value;
-        isFiltered(true);
+        const value = e.target.value.trim().toLowerCase();
+        setFiltered(true);
+        setFilterValue(value);
+        setCurrentId(null);
 
-        if(value.trim() === "") {
-            isFiltered(false);
+        if(value === "") {
+            setFiltered(false);
         }
-
-        const filteredNotes = allNotes.filter(note => note.title.toLowerCase().includes(value));
-        setAllNotes(filteredNotes);
     }
     return (
         <header>
