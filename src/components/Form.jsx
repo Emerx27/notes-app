@@ -1,7 +1,7 @@
-function Form({allNotes, currentId, fillInput, deleteNote}) {
-    const actualEditedNote = allNotes.filter(note => note.id === currentId);
+function Form({filteredNotes, currentId, fillInput, deleteNote}) {
+    const actualEditedNote = filteredNotes.filter(note => note.id === currentId);
     return actualEditedNote.map(note => (
-        <form key={note.id}>
+        <form onSubmit={e => e.preventDefault()} key={note.id}>
             <div>
                 <input type="text" value={note.title} onChange={fillInput} name="title" />
 
