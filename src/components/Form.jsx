@@ -1,4 +1,15 @@
-function Form({allNotes, currentId, fillInput, deleteNote}) {
+function Form({
+    allNotes, 
+    currentId, 
+    fillInput, 
+    deleteNote, 
+    isEdited,
+    updateNoteStates
+    }) {
+    function handleStates() {
+        updateNoteStates({ currentId: null, isEdited: false, filterValue: "", filtered: false});
+    }
+
     const actualEditedNote = allNotes.filter(note => note.id === currentId);
     return actualEditedNote.map(note => (
         <form onSubmit={e => e.preventDefault()} key={note.id}>
@@ -8,7 +19,8 @@ function Form({allNotes, currentId, fillInput, deleteNote}) {
                 <textarea value={note.content} onChange={fillInput} name="content"></textarea>
             </div>
 
-            <button onClick={deleteNote}>Delete note</button>
+            <button onClick={() => {deleteNote(), handleStates()}}>Delete note</button>
+            {isEdited ? <button onClick={handleStates}>Save changes</button>  : null}
         </form>
     ))
 }

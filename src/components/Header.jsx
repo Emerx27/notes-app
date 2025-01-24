@@ -1,6 +1,6 @@
-function Header({setFiltered, setFilterValue, setCurrentId}) {
+function Header({setFiltered, setFilterValue, setCurrentId, isEdited}) {
     function filterNotes(e) {
-        const value = e.target.value.trim().toLowerCase();
+        let value = e.target.value.trim().toLowerCase();
         setFiltered(true);
         setFilterValue(value);
         setCurrentId(null);
@@ -9,15 +9,19 @@ function Header({setFiltered, setFilterValue, setCurrentId}) {
             setFiltered(false);
         }
     }
-    return (
-        <header>
-            <div>
-                <h1>Notes</h1>
-
-                <input type="text" placeholder="Search by title..." onChange={filterNotes}/>
-            </div>
-        </header>
-    )
+    if(!isEdited) {
+        return (
+            <header>
+                <div>
+                    <h1>Notes</h1>
+    
+                    <input type="text" placeholder="Search by title..." onChange={filterNotes}/>
+                </div>
+            </header>
+        )
+    } else {
+        return null;
+    }
 }
 
 export default Header;

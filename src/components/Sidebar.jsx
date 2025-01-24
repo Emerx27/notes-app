@@ -10,8 +10,16 @@ function Sidebar() {
         content: "Write your thoughts here...",
     });
     const [filtered, setFiltered] = useState(false);
+    const [isEdited, setIsEdited] = useState(false);
     const [nextId, setNextId] = useState(JSON.parse(localStorage.getItem("nextId")) || 1);
     const [filterValue, setFilterValue] = useState("");
+
+    function updateNoteStates(newState) {
+        if (newState.currentId !== undefined) setCurrentId(newState.currentId);
+        if (newState.isEdited !== undefined) setIsEdited(newState.isEdited);
+        if (newState.filterValue !== undefined) setFilterValue(newState.filterValue);
+        if (newState.filtered !== undefined) setFiltered(newState.filtered);
+    }
 
     useEffect(() => {
         localStorage.setItem("notes", JSON.stringify(allNotes));
@@ -32,8 +40,8 @@ function Sidebar() {
         const date = `${day} / ${month} / ${year}`;
         const newNote = { ...note, title, id: nextId, date };
         if (!filtered) {
-            setAllNotes([...allNotes, {...newNote}]);
-            setCurrentId(nextId);
+            setAllNotes([...allNotes, { ...newNote }]);
+            setCurrentId(null);
             const newId = nextId + 1;
             setNextId(newId);
         }
@@ -59,22 +67,22 @@ function Sidebar() {
         setCurrentId(null);
     }
     return (
-        <>
-            <Header
+        <>   <Header
                 setFiltered={setFiltered}
                 setFilterValue={setFilterValue}
                 setCurrentId={setCurrentId}
-            />
+                isEdited={isEdited}
+            />   
             <aside>
-                {filtered ? null : <button onClick={createNote}>Create new note</button>}
+                {filtered || isEdited ? null : <button onClick={createNote}>Create new note</button>}
 
                 <ul>
                     <Note
+                        setIsEdited={setIsEdited}
                         allNotes={allNotes}
                         filterValue={filterValue}
                         noteEditedId={noteEditedId}
                         setCurrentId={setCurrentId}
-                        
                     />
                 </ul>
             </aside>
@@ -84,6 +92,8 @@ function Sidebar() {
                 currentId={currentId}
                 fillInput={fillInput}
                 deleteNote={deleteNote}
+                isEdited={isEdited}
+                updateNoteStates={updateNoteStates}
             />
         </>
     )
