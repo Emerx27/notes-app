@@ -67,26 +67,30 @@ function Sidebar() {
         setCurrentId(null);
     }
     return (
-        <>   <Header
-                setFiltered={setFiltered}
-                setFilterValue={setFilterValue}
-                setCurrentId={setCurrentId}
-                isEdited={isEdited}
-            />   
-            <aside>
-                {filtered || isEdited ? null : <button onClick={createNote}>Create new note</button>}
+        <>
+            {isEdited ? null :
+                <Header
+                    setFiltered={setFiltered}
+                    setFilterValue={setFilterValue}
+                    setCurrentId={setCurrentId}
+                    isEdited={isEdited} />
+            }
 
-                <ul>
-                    <Note
-                        setIsEdited={setIsEdited}
-                        allNotes={allNotes}
-                        filterValue={filterValue}
-                        noteEditedId={noteEditedId}
-                        setCurrentId={setCurrentId}
-                    />
-                </ul>
-            </aside>
+            {isEdited ? null :
+                <aside>
+                    {filtered ? null : <button onClick={createNote}>Create new note</button>}
 
+                    <ul>
+                        <Note
+                            setIsEdited={setIsEdited}
+                            allNotes={allNotes}
+                            filterValue={filterValue}
+                            noteEditedId={noteEditedId}
+                            setCurrentId={setCurrentId}
+                        />
+                    </ul>
+                </aside>
+            }
             <Form
                 allNotes={allNotes}
                 currentId={currentId}
