@@ -15,7 +15,7 @@ function Form({
         setAllNotes(prevNotes =>
             prevNotes.map(note =>
                 note.id === currentId && note.title === ""
-                    ? { ...note, title: `Untitled Note ${currentId}` }
+                    ? { ...note, title: `Untitled ${currentId}` }
                     : note
             )
         );
