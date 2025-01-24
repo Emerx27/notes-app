@@ -94,6 +94,7 @@ function Sidebar() {
                 deleteNote={deleteNote}
                 isEdited={isEdited}
                 updateNoteStates={updateNoteStates}
+                setAllNotes={setAllNotes}
             />
         </>
     )
