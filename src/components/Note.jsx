@@ -2,7 +2,7 @@ function Note({allNotes, noteEditedId, filterValue, setIsEdited}) {
     const filteredNotes = allNotes.filter(note => note.title.toLowerCase().includes(filterValue));
     return filteredNotes.map(note => (
         <li key={note.id}>
-            <article onClick={() => {
+            <article className="sidebar__list-note" onClick={() => {
                 noteEditedId(note.id)
                 setIsEdited(true)
                 }}>

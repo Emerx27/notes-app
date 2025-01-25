@@ -77,10 +77,10 @@ function Sidebar() {
             }
 
             {isEdited ? null :
-                <aside>
-                    {filtered ? null : <button onClick={createNote}>Create new note</button>}
+                <aside className="sidebar">
+                    {filtered ? null : <button className="sidebar__btn" onClick={createNote}>Create new note</button>}
 
-                    <ul>
+                    <ul className="sidebar__list">
                         <Note
                             setIsEdited={setIsEdited}
                             allNotes={allNotes}
