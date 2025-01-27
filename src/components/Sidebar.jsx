@@ -68,17 +68,16 @@ function Sidebar() {
     }
     return (
         <>
-            {isEdited ? null :
                 <Header
                     setFiltered={setFiltered}
                     setFilterValue={setFilterValue}
                     setCurrentId={setCurrentId}
-                    isEdited={isEdited} />
-            }
+                    setIsEdited={setIsEdited}     
+                />
+            
 
-            {isEdited ? null :
                 <aside className="sidebar">
-                    {filtered ? null : <button className="sidebar__btn" onClick={createNote}>+ Create new note</button>}
+                    {filtered || isEdited ? null : <button className="sidebar__btn" onClick={createNote}>+ Create new note</button>}
 
                     <ul className="sidebar__list">
                         <Note
@@ -90,7 +89,7 @@ function Sidebar() {
                         />
                     </ul>
                 </aside>
-            }
+            
             <Form
                 allNotes={allNotes}
                 currentId={currentId}

@@ -21,6 +21,7 @@
         font-size: 1.4rem;
         width: 100%;
         transition: .3s background-color;
+        margin-bottom: 2rem;
 
         &:hover {
             cursor: pointer;
@@ -31,7 +32,6 @@
     &__list {
         display: flex;
         flex-direction: column;
-        margin-top: 2rem;
         overflow-y: auto;
         max-height: calc(100% - 5rem - 2rem);
        
