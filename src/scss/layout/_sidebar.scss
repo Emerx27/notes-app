@@ -1,4 +1,5 @@
 @use "../base/variables" as v;
+@use "../base/mixins" as m;
 @use "sass:color";
 
 .sidebar {
@@ -12,21 +13,7 @@
     padding: 2rem;
 
     &__btn {
-        border: none;
-        background-color: v.$blue;
-        color: v.$white;
-        font-weight: bold;
-        padding: 1.5rem 1rem;
-        border-radius: .3rem;
-        font-size: 1.4rem;
-        width: 100%;
-        transition: .3s background-color;
-        margin-bottom: 2rem;
-
-        &:hover {
-            cursor: pointer;
-            background-color: color.scale($color: v.$blue, $lightness: -5%);
-        }
+        @include m.button($margin-b: 2rem);
     }
 
     &__list {

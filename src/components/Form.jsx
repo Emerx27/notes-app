@@ -32,8 +32,8 @@ function Form({
             </div>
 
             <div className="form__buttons">
-                <button className="form__buttons-delete" type="button" onClick={() => { deleteNote(), handleStates() }}>Delete note</button>
-                {isEdited ? <button className="form__buttons-save" type="button" onClick={() => { handleStates(), handleTitle() }}>Save changes</button> : null}
+                <button className="form__buttons-btn form__buttons-btn--delete" type="button" onClick={() => { deleteNote(), handleStates() }}>Delete note</button>
+                {isEdited ? <button className="form__buttons-btn form__buttons-btn--save" type="button" onClick={() => { handleStates(), handleTitle() }}>Save changes</button> : null}
             </div>
             </div>
         </form>
