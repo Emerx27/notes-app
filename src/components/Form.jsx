@@ -1,14 +1,14 @@
 function Form({
-    allNotes, 
-    currentId, 
-    fillInput, 
-    deleteNote, 
+    allNotes,
+    currentId,
+    fillInput,
+    deleteNote,
     isEdited,
     updateNoteStates,
     setAllNotes
-    }) {
+}) {
     function handleStates() {
-        updateNoteStates({ currentId: null, isEdited: false, filterValue: "", filtered: false});
+        updateNoteStates({ currentId: null, isEdited: false, filterValue: "", filtered: false });
     }
 
     function handleTitle() {
@@ -23,15 +23,17 @@ function Form({
 
     const actualEditedNote = allNotes.filter(note => note.id === currentId);
     return actualEditedNote.map(note => (
-        <form onSubmit={e => e.preventDefault()} key={note.id}>
-            <div>
-                <input type="text" value={note.title} onChange={fillInput} name="title" />
+        <form className="form" onSubmit={e => e.preventDefault()} key={note.id}>
+            <div className="form__content">
+                <input className="form__content-input" type="text" value={note.title} onChange={fillInput} name="title" />
 
-                <textarea value={note.content} onChange={fillInput} name="content"></textarea>
+                <textarea className="form__content-text" value={note.content} onChange={fillInput} name="content"></textarea>
             </div>
 
-            <button type="button" onClick={() => {deleteNote(), handleStates()}}>Delete note</button>
-            {isEdited ? <button type="button" onClick={() => {handleStates(), handleTitle()}}>Save changes</button>  : null}
+            <div className="form__buttons">
+                <button className="form__buttons-delete" type="button" onClick={() => { deleteNote(), handleStates() }}>Delete note</button>
+                {isEdited ? <button className="form__buttons-save" type="button" onClick={() => { handleStates(), handleTitle() }}>Save changes</button> : null}
+            </div>
         </form>
     ))
 }
