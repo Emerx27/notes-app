@@ -1,15 +1,18 @@
 import Sidebar from "./components/Sidebar";
 import "normalize.css";
 import "./scss/index.scss";
-
+import { ScreenProvider } from "./contexts/ScreenContext";
 function App() {
+
   return (
     <>
-      <main>
-        <Sidebar/>
-      </main>
+      <ScreenProvider>
+        <main>
+          <Sidebar />
+        </main>
+      </ScreenProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

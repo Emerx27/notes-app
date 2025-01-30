@@ -5,20 +5,10 @@ function Form({
     deleteNote,
     isEdited,
     updateNoteStates,
-    setAllNotes
+    handleUntitledNotes
 }) {
     function handleStates() {
         updateNoteStates({ currentId: null, isEdited: false, filterValue: "", filtered: false });
-    }
-
-    function handleTitle() {
-        setAllNotes(prevNotes =>
-            prevNotes.map(note =>
-                note.id === currentId && note.title === ""
-                    ? { ...note, title: `Untitled ${currentId}` }
-                    : note
-            )
-        );
     }
 
     const actualEditedNote = allNotes.filter(note => note.id === currentId);
@@ -33,7 +23,7 @@ function Form({
 
             <div className="form__buttons">
                 <button className="form__buttons-btn form__buttons-btn--delete" type="button" onClick={() => { deleteNote(), handleStates() }}>Delete note</button>
-                {isEdited ? <button className="form__buttons-btn form__buttons-btn--save" type="button" onClick={() => { handleStates(), handleTitle() }}>Save changes</button> : null}
+                {isEdited ? <button className="form__buttons-btn form__buttons-btn--save" type="button" onClick={() => { handleStates(), handleUntitledNotes() }}>Save changes</button> : null}
             </div>
             </div>
         </form>

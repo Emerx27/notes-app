@@ -66,30 +66,36 @@ function Sidebar() {
         setAllNotes(actualEditedNote);
         setCurrentId(null);
     }
+
+    function handleUntitledNotes() {
+        setAllNotes(prevNotes =>
+            prevNotes.map(note => note.title === "" ? { ...note, title: `Untitled ${note.id}` } : note))
+    }
     return (
         <>
-                <Header
-                    setFiltered={setFiltered}
-                    setFilterValue={setFilterValue}
-                    setCurrentId={setCurrentId}
-                    setIsEdited={setIsEdited}     
-                />
-            
+            <Header
+                setFiltered={setFiltered}
+                setFilterValue={setFilterValue}
+                setCurrentId={setCurrentId}
+                setIsEdited={setIsEdited}
+                handleUntitledNotes={handleUntitledNotes}
+            />
 
-                <aside className="sidebar">
-                    {filtered || isEdited ? null : <button className="sidebar__btn" onClick={createNote}>+ Create new note</button>}
 
-                    <ul className="sidebar__list">
-                        <Note
-                            setIsEdited={setIsEdited}
-                            allNotes={allNotes}
-                            filterValue={filterValue}
-                            noteEditedId={noteEditedId}
-                            setCurrentId={setCurrentId}
-                        />
-                    </ul>
-                </aside>
-            
+            <aside className="sidebar">
+                {filtered || isEdited ? null : <button className="sidebar__btn" onClick={createNote}>+ Create new note</button>}
+
+                <ul className="sidebar__list">
+                    <Note
+                        setIsEdited={setIsEdited}
+                        allNotes={allNotes}
+                        filterValue={filterValue}
+                        noteEditedId={noteEditedId}
+                        setCurrentId={setCurrentId}
+                    />
+                </ul>
+            </aside>
+
             <Form
                 allNotes={allNotes}
                 currentId={currentId}
@@ -97,7 +103,7 @@ function Sidebar() {
                 deleteNote={deleteNote}
                 isEdited={isEdited}
                 updateNoteStates={updateNoteStates}
-                setAllNotes={setAllNotes}
+                handleUntitledNotes={handleUntitledNotes}
             />
         </>
     )
