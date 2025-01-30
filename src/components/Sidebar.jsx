@@ -97,15 +97,19 @@ function Sidebar() {
                         +
                     </button>
                 ) : null}
-                <ul className="sidebar__list">
-                    <Note
-                        setIsEdited={setIsEdited}
-                        allNotes={allNotes}
-                        filterValue={filterValue}
-                        noteEditedId={noteEditedId}
-                        setCurrentId={setCurrentId}
-                    />
-                </ul>
+                {screenSize < 1080 && isEdited ? 
+                    null
+                    :
+                    <ul className="sidebar__list">
+                        <Note
+                            setIsEdited={setIsEdited}
+                            allNotes={allNotes}
+                            filterValue={filterValue}
+                            noteEditedId={noteEditedId}
+                            setCurrentId={setCurrentId}
+                        />
+                    </ul>
+                }
             </aside>
 
             <Form

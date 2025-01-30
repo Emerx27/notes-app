@@ -1,13 +1,23 @@
 @use "../base/variables" as v;
+@use "../base/mixins" as m;
 
 .header {
-    margin-left: 30rem;
-    padding: 2rem 3rem;
+    padding: 2rem;
     border-bottom: 1px solid v.$lightGray;
+
+    @include m.pc {
+        padding: 2rem 3rem;
+        margin-left: 30rem;
+    }
     &__content {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 2rem;
+        @include m.tab {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
 
     &__input {
