@@ -3,8 +3,8 @@
 @use "sass:color";
 
 .sidebar {
-    padding: 2rem;
     @include m.pc {
+        padding: 2rem;
         position: fixed;
         top: 0;
         bottom: 0;
@@ -31,9 +31,12 @@
     &__list {
         display: flex;
         flex-direction: column;
+        padding: 2rem;
+
         @include m.pc {
+            padding: 0;
             overflow-y: auto;
-            max-height: calc(100% - 5rem - 2rem);
+            height: calc(100% - 5rem - 2rem);
         }
 
         &-note {

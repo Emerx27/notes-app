@@ -2,13 +2,21 @@
 @use "../base/mixins" as m;
 
 .form {
-    margin-left: 30rem;
+    @include m.pc {
+        margin-left: 30rem;
+    }
 
     &__content {
-        padding: 2rem 3rem;
+        padding: 2rem;
         display: flex;
-        justify-content: space-between;
-        gap: 2rem;
+        flex-direction: column-reverse;
+        gap: 4rem;
+
+        @include m.pc {
+            padding: 2rem 3rem;
+            flex-direction: row;
+            gap: 2rem;
+        }
     }
 
     &__section {
@@ -16,8 +24,12 @@
         flex-direction: column;
         gap: 2rem;
         flex: 1;
-        padding-right: 2rem;
         position: relative;
+
+        @include m.pc {
+            padding-right: 2rem;
+        }
+
         &-input,
         &-text {
             border: none;
@@ -32,25 +44,31 @@
             resize: none;
         }
 
-        &::after {
-            content: "";
-            position: absolute;
-            width: .1rem;
-            border: 1px solid v.$lightGray;
-            height: calc(100% + 4rem);
-            right: 0;
-            top: -2rem;
+        @include m.pc {
+            &::after {
+                content: "";
+                position: absolute;
+                width: .1rem;
+                border: 1px solid v.$lightGray;
+                height: calc(100% + 4rem);
+                right: 0;
+                top: -2rem;
+            }
         }
     }
 
     &__buttons {
         display: flex;
-        flex-direction: column;
         flex: 0.4;
         gap: 1rem;
 
+        @include m.pc {
+            flex-direction: column
+        }
+
         &-btn {
             @include m.button;
+
             &--delete {
                 @include m.button(v.$red);
             }
