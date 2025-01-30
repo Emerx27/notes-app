@@ -24,9 +24,11 @@
     width: 100%;
     transition: .3s background-color;
     margin-bottom: $margin-b;
+
     &:hover {
         cursor: pointer;
         background-color: color.scale($color: $background, $lightness: -5%);
     }
 }
+
 

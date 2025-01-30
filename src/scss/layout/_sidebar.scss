@@ -14,6 +14,16 @@
 
     &__btn {
         @include m.button($margin-b: 2rem);
+
+        &--mobile {
+            width: 8rem;
+            height: 8rem;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            border-radius: 50%;
+            font-size: 2.2rem;
+        }
     }
 
     &__list {
@@ -21,7 +31,7 @@
         flex-direction: column;
         overflow-y: auto;
         max-height: calc(100% - 5rem - 2rem);
-       
+
         &-note {
             border-top: 1px solid v.$lightGray;
             padding-bottom: 1rem;

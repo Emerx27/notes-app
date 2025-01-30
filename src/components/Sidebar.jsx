@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Header from "./Header";
 import Form from "./Form";
 import Note from "./Note";
+import { ScreenContext } from "../contexts/ScreenContext";
 
 function Sidebar() {
+    const screenSize = useContext(ScreenContext);
+
     const [allNotes, setAllNotes] = useState(JSON.parse(localStorage.getItem("notes")) || []);
     const [currentId, setCurrentId] = useState(null);
     const [note, setNote] = useState({
@@ -83,8 +86,17 @@ function Sidebar() {
 
 
             <aside className="sidebar">
-                {filtered || isEdited ? null : <button className="sidebar__btn" onClick={createNote}>+ Create new note</button>}
+                {filtered || isEdited || screenSize < 1080 ? null : (
+                    <button className="sidebar__btn" onClick={createNote}>
+                        + Create new note
+                    </button>
+                )}
 
+                {screenSize < 1080 && !filtered && !isEdited ? (
+                    <button className="sidebar__btn sidebar__btn--mobile" onClick={createNote}>
+                        +
+                    </button>
+                ) : null}
                 <ul className="sidebar__list">
                     <Note
                         setIsEdited={setIsEdited}
