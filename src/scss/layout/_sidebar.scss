@@ -3,14 +3,16 @@
 @use "sass:color";
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    border-right: 1px solid v.$lightGray;
-    width: 30rem;
-    background-color: v.$white;
     padding: 2rem;
+    @include m.pc {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border-right: 1px solid v.$lightGray;
+        width: 30rem;
+        background-color: v.$white;
+    }
 
     &__btn {
         @include m.button($margin-b: 2rem);
