@@ -108,6 +108,8 @@ function Sidebar() {
                             filterValue={filterValue}
                             noteEditedId={noteEditedId}
                             setCurrentId={setCurrentId}
+                            handleUntitledNotes={handleUntitledNotes}
+
                         />
                     </ul>
                 }
