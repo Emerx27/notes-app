@@ -5,16 +5,20 @@ html {
     box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: inherit;
 }
 
 body {
-    font-size: 16px; /* 1rem = 10px */
+    font-size: 16px;
+    /* 1rem = 10px */
     font-family: v.$mainFont;
 }
 
-h2,h3{
+h2,
+h3 {
     margin: 1rem 0;
     color: v.$darkGray;
 }
@@ -54,7 +58,8 @@ textarea:focus {
     outline: none;
 }
 
-input, textarea {
+input,
+textarea {
     color: v.$darkGray;
 }
 
@@ -68,4 +73,41 @@ textarea {
 
 .material-symbols-outlined {
     color: v.$darkGray;
+}
+
+.main {
+    position: absolute;
+    inset: 0;
+
+    &--dark {
+        background-color: v.$bgDark;
+        h1,h2,h3,p {
+            color: v.$white;
+        }
+
+        .sidebar {
+            background-color: v.$bgDark;
+        }
+
+        input,
+        textarea {
+            background-color: transparent;
+            color: v.$white;
+        }
+
+        .material-symbols-outlined {
+            color: v.$white;
+        }
+
+        .header__menu {
+            background-color: v.$bgDark;
+            border: 1px solid v.$lightGray;
+            &-switch--dark {
+                &::after {
+                    right: 0;
+                }
+            }
+        }
+
+    }
 }
