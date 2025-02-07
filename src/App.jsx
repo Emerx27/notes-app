@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <ScreenProvider>
-        <main className={isDarkMode ? "dark" : "light"}>
+        <main className={`main ${isDarkMode ? "main--dark" : "main--light"}`}>
           <Sidebar />
         </main>
       </ScreenProvider>
